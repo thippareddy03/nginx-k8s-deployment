@@ -1,3 +1,5 @@
+#to create name for the deployment which we are creating we need to use below command
+#kubectl create/apply -f nginix.yam --namespace="<name-space which we created already or new space with this command can be created>"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,18 +7,19 @@ metadata:
   labels:
     env: qa
 spec:
-  minReadySeconds: 10s
+  minReadySeconds: 10
   replicas: 3
   selector:
     matchLabels:
-      name: deplo
+      env: qa
   template:
     metadata:
-      name: deplo
+      labels:
+        env: qa
     spec:
       containers:
         - image: nginx:latest
-          name: nginx Deployment
+          name: nginx-deployment
           ports:
             - containerPort: 80
               protocol: TCP
